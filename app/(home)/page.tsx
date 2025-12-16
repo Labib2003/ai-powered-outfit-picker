@@ -12,11 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Navbar from "@/components/navbar";
-import Hero from "@/components/hero";
-import ProductGrid from "@/components/product-grid";
-import CartSidebar from "@/components/cart-sidebar";
-import Footer from "@/components/footer";
+import Navbar from "./components/navbar";
+import Hero from "./components/hero";
+import ProductGrid from "./components/product-grid";
+import CartSidebar from "./components/cart-sidebar";
+import Footer from "./components/footer";
 
 export default function Home() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -48,7 +48,7 @@ export default function Home() {
 
       <main className="flex flex-col lg:flex-row gap-6 p-4 md:p-8 max-w-7xl mx-auto">
         {/* Sidebar */}
-        <aside className="w-full lg:w-64 flex-shrink-0">
+        <aside className="w-full lg:w-64 shrink-0">
           <div className="space-y-6 sticky top-24">
             {/* Search */}
             <div className="relative">

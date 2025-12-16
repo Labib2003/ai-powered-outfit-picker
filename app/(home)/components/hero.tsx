@@ -23,19 +23,24 @@ export default function Hero() {
   return (
     <section className="pb-12">
       {/* Hero Banner */}
-      <div className="relative h-[80vh] bg-gradient-to-br from-secondary via-background to-secondary overflow-hidden">
+      <div className="relative h-[80vh] bg-linear-to-br from-secondary via-background to-secondary overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
-          <Image src={assets.images.heroBanner} alt="Hero Banner" priority />
+          <Image
+            src={assets.images.heroBanner}
+            alt="Hero Banner"
+            className="h-full object-cover object-left"
+            priority
+          />
         </div>
 
         <div className="relative h-full flex flex-col items-start justify-center px-4 sm:px-8 md:px-12 lg:px-16 max-w-7xl mx-auto">
           {/* Main heading with display font */}
-          <h1 className="pt-16 font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-foreground mb-4 text-balance leading-tight">
+          <h1 className="pt-16 font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-foreground text-balance leading-tight">
             Curated Style
           </h1>
 
           {/* Subtitle with regular font */}
-          <p className="font-sans text-base sm:text-lg md:text-xl text-accent-foreground mb-12 max-w-2xl text-balance leading-relaxed">
+          <p className="font-sans text-base sm:text-lg md:text-xl text-accent-foreground mb-4 max-w-2xl text-balance leading-relaxed">
             Discover premium fashion pieces
             <br />
             handpicked for your unique aesthetic
