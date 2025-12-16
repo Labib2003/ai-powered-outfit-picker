@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { products, sizesEnum } from "./schema/product";
-import { categories } from "./schema/category";
+import { categoryTable } from "./schema/category";
 import { randomUUID } from "crypto";
 import { db } from "./drizzle";
 
@@ -14,7 +14,7 @@ async function main() {
     description: faker.commerce.productDescription(),
   }));
 
-  await db.insert(categories).values(categoryData);
+  await db.insert(categoryTable).values(categoryData);
   console.log("✅ Inserted categories");
 
   // 2️⃣ Create 25 products (5 per category)

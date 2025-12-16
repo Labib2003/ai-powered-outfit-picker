@@ -20,7 +20,7 @@ import Footer from "./components/footer";
 
 export default function Home() {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([
+  const [cartItems] = useState([
     {
       id: 1,
       name: "Classic White Tee",

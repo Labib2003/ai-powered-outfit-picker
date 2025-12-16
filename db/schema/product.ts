@@ -7,7 +7,7 @@ import {
   varchar,
   vector,
 } from "drizzle-orm/pg-core";
-import { categories } from "./category";
+import { categoryTable } from "./category";
 
 export const sizesEnum = pgEnum("sizes", ["S", "M", "L", "XL"]);
 
@@ -22,7 +22,7 @@ export const products = pgTable("products", {
   embedding: vector("embedding", { dimensions: 1536 }),
 
   categoryId: uuid("category_id")
-    .references(() => categories.id)
+    .references(() => categoryTable.id)
     .notNull(),
 
   createdAt: timestamp("created_at").notNull().defaultNow(),

@@ -1,13 +1,12 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Faculty_Glyphic, Geist, Geist_Mono } from "next/font/google";
-import { Playfair_Display } from "next/font/google";
+import { Faculty_Glyphic, Geist } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Provider from "./_trpc/Provider";
 
 const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 const _facultyGlyphic = Faculty_Glyphic({
   weight: "400",
   subsets: ["latin"],
@@ -34,7 +33,7 @@ export default function RootLayout({
           _facultyGlyphic.variable,
         )}
       >
-        {children}
+        <Provider>{children}</Provider>
         <Analytics />
       </body>
     </html>
