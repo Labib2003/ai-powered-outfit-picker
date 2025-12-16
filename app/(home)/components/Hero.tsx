@@ -8,18 +8,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Category } from "@/db/schema/category";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
 
-const categories = [
-  { name: "Dresses", image: "/elegant-dress.png" },
-  { name: "Blazers", image: "/premium-blazer.jpg" },
-  { name: "Accessories", image: "/luxury-accessories.png" },
-  { name: "Shoes", image: "/designer-shoes.jpg" },
-  { name: "Bags", image: "/luxury-handbag.png" },
-];
-
-export default function Hero() {
+export default function Hero({ categories }: { categories: Category[] }) {
   return (
     <section className="pb-12">
       {/* Hero Banner */}
@@ -67,18 +60,20 @@ export default function Hero() {
         </h2>
         <Carousel className="w-full">
           <CarouselContent className="-ml-2 md:-ml-4">
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <CarouselItem
-                key={index}
+                key={category.id}
                 className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
               >
                 <div className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-lg bg-secondary h-48 mb-3">
+                  <div className="relative overflow-hidden rounded-lg h-48 mb-3 p-3 flex items-end">
                     <img
-                      src={category.image || "/placeholder.svg"}
+                      src={category.imageUrl ?? undefined}
                       alt={category.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition duration-300 absolute inset-0"
                     />
+                    <div className="bg-linear-to-t from-black via-black/80 to-transparent absolute inset-0"></div>
+                    <p className="z-10 text-white">{category.description}</p>
                   </div>
                   <h3 className="font-sans text-lg font-semibold text-foreground group-hover:text-primary transition">
                     {category.name}
