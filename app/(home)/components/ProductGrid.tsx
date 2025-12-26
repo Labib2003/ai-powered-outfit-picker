@@ -12,6 +12,9 @@ import {
 } from "@/components/ui/select";
 import { useCallback } from "react";
 import { trpc } from "@/app/_trpc/client";
+import { HandlePagination } from "@/components/custom/HandlePagination";
+import ProductCard from "./ProductCard";
+import ProductCardSkeleton from "./ProductCardSkeleton";
 
 export default function ProductGrid() {
   const router = useRouter();
@@ -19,7 +22,7 @@ export default function ProductGrid() {
   const searchParams = useSearchParams();
 
   const page = Number(searchParams.get("page") ?? 1);
-  const limit = Number(searchParams.get("limit") ?? 10);
+  const limit = Number(searchParams.get("limit") ?? 9);
 
   const search = searchParams.get("search") ?? undefined;
   const filterCategories = searchParams.getAll("category");
@@ -27,7 +30,7 @@ export default function ProductGrid() {
   const priceMax = searchParams.get("priceMax");
   const sort = searchParams.get("sort") ?? "newest";
 
-  const { data: paginatedProducts } = trpc.product.list.useQuery({
+  const { data: paginatedProducts, isLoading } = trpc.product.list.useQuery({
     page,
     limit,
     search,
@@ -75,39 +78,27 @@ export default function ProductGrid() {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {paginatedProducts?.data?.map((product) => (
-          <Card
-            key={product.id}
-            className="overflow-hidden hover:shadow-lg transition group"
-          >
-            <div className="relative overflow-hidden bg-muted h-64">
-              <img
-                src={product.imageUrl || undefined}
-                alt={product.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
-              />
-            </div>
-
-            <div className="p-4 space-y-3">
-              <h3 className="font-semibold text-foreground line-clamp-2">
-                {product.name}
-              </h3>
-
-              <div className="flex items-center justify-between">
-                <span className="text-xl font-bold text-primary">
-                  ${product.price}
-                </span>
-                <Button
-                  size="sm"
-                  className="bg-linear-to-r from-primary to-accent hover:opacity-90"
-                >
-                  Add to Cart
-                </Button>
-              </div>
-            </div>
-          </Card>
-        ))}
+        {isLoading ? (
+          <>
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+          </>
+        ) : (
+          paginatedProducts?.data?.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        )}
       </div>
+
+      {paginatedProducts && (
+        <div className="mt-10 flex justify-center">
+          <HandlePagination
+            page={paginatedProducts.pagination.page}
+            totalPages={paginatedProducts.pagination.totalPages}
+          />
+        </div>
+      )}
     </div>
   );
 }
