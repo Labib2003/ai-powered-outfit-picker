@@ -12,11 +12,31 @@ import {
 } from "@/components/ui/select";
 import { Product } from "@/db/schema/product";
 import { useCallback } from "react";
+import { trpc } from "@/app/_trpc/client";
 
-export default function ProductGrid({ products }: { products?: Product[] }) {
+export default function ProductGrid() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const page = Number(searchParams.get("page") ?? 1);
+  const limit = Number(searchParams.get("limit") ?? 10);
+
+  const search = searchParams.get("search") ?? undefined;
+  const filterCategories = searchParams.getAll("category");
+  const priceMin = searchParams.get("priceMin");
+  const priceMax = searchParams.get("priceMax");
+  const sort = searchParams.get("sort") ?? "newest";
+
+  const { data: paginatedProducts } = trpc.product.list.useQuery({
+    page,
+    limit,
+    search,
+    category: filterCategories.length ? filterCategories : undefined,
+    priceMin: priceMin ? Number(priceMin) : undefined,
+    priceMax: priceMax ? Number(priceMax) : undefined,
+    sort: sort as any,
+  });
 
   const updateParams = useCallback(
     (mutator: (params: URLSearchParams) => void) => {
@@ -26,7 +46,6 @@ export default function ProductGrid({ products }: { products?: Product[] }) {
     },
     [router, pathname, searchParams],
   );
-  const sort = searchParams.get("sort") ?? "newest";
 
   return (
     <div className="flex-1">
@@ -57,7 +76,7 @@ export default function ProductGrid({ products }: { products?: Product[] }) {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products?.map((product) => (
+        {paginatedProducts?.data?.map((product) => (
           <Card
             key={product.id}
             className="overflow-hidden hover:shadow-lg transition group"

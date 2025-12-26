@@ -6,7 +6,6 @@ import { db } from "@/db/drizzle";
 import { categoryTable } from "@/db/schema/category";
 
 export const categoryRouter = router({
-  // READ (Paginated list)
   list: publicProcedure.query(async () => {
     try {
       // Query paginated users

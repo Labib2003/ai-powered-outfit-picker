@@ -15,8 +15,5 @@ export const categoryTable = pgTable("categories", {
     .$onUpdateFn(() => new Date()),
 });
 
-const categorySelectSchema = createSelectSchema(categoryTable).extend({
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
+const categorySelectSchema = createSelectSchema(categoryTable);
 export type Category = z.infer<typeof categorySelectSchema>;

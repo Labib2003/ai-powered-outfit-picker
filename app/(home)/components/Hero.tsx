@@ -1,5 +1,3 @@
-"use client";
-
 import assets from "@/app/assets";
 import {
   Carousel,
