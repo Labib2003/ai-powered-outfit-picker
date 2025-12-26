@@ -10,7 +10,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Product } from "@/db/schema/product";
 import { useCallback } from "react";
 import { trpc } from "@/app/_trpc/client";
 

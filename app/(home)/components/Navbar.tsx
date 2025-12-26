@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import CartSidebar from "./cart-sidebar";
+import CartSidebar from "./CartSidebar";
 
 export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
