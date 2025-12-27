@@ -1,8 +1,6 @@
 "use client";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -41,8 +39,9 @@ export default function ProductGrid() {
   });
 
   const updateParams = useCallback(
-    (mutator: (params: URLSearchParams) => void) => {
+    (mutator: (params: URLSearchParams) => void, resetPage?: boolean) => {
       const params = new URLSearchParams(searchParams.toString());
+      if (resetPage) params.set("page", "1");
       mutator(params);
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
@@ -57,12 +56,9 @@ export default function ProductGrid() {
           value={sort}
           onValueChange={(value) =>
             updateParams((params) => {
-              if (value === "newest") {
-                params.delete("sort");
-              } else {
-                params.set("sort", value);
-              }
-            })
+              if (value === "newest") params.delete("sort");
+              else params.set("sort", value);
+            }, true)
           }
         >
           <SelectTrigger className="w-48">

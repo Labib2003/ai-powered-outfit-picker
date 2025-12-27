@@ -4,7 +4,7 @@ import { Product } from "@/db/schema/product";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition group">
+    <Card className="overflow-hidden hover:shadow-lg transition group pt-0">
       <div className="relative overflow-hidden bg-muted h-64">
         <img
           src={product.imageUrl || undefined}
@@ -13,10 +13,17 @@ const ProductCard = ({ product }: { product: Product }) => {
         />
       </div>
 
-      <div className="p-4 space-y-3">
+      <div className="px-5 space-y-3">
         <h3 className="font-semibold text-foreground line-clamp-2">
           {product.name}
         </h3>
+
+        <p
+          className="text-sm text-muted-foreground line-clamp-3"
+          title={product.description}
+        >
+          {product.description}
+        </p>
 
         <div className="flex items-center justify-between">
           <span className="text-xl font-bold text-primary">

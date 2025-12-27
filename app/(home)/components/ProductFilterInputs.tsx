@@ -14,8 +14,9 @@ const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
   const searchParams = useSearchParams();
 
   const updateParams = useCallback(
-    (mutator: (params: URLSearchParams) => void) => {
+    (mutator: (params: URLSearchParams) => void, resetPage?: boolean) => {
       const params = new URLSearchParams(searchParams.toString());
+      if (resetPage) params.set("page", "1");
       mutator(params);
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
@@ -39,7 +40,7 @@ const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
       if (!existing.includes(id)) {
         params.append("category", id);
       }
-    });
+    }, true);
   };
 
   return (
@@ -55,7 +56,7 @@ const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
               updateParams((params) => {
                 if (e.target.value) params.set("search", e.target.value);
                 else params.delete("search");
-              })
+              }, true)
             }
             className="pl-10"
           />
@@ -91,7 +92,7 @@ const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
               updateParams((params) => {
                 params.set("priceMin", String(min));
                 params.set("priceMax", String(max));
-              })
+              }, true)
             }
           />
           <div className="flex justify-between text-sm text-muted-foreground">
