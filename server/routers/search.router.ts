@@ -242,7 +242,7 @@ export const searchRouter = router({
                 name: string;
                 reason: string;
               };
-              products: Product[];
+              products: (Product & { reason: string })[];
             }
           >
         >((acc, curr) => {
@@ -259,7 +259,10 @@ export const searchRouter = router({
             };
           }
 
-          acc[categoryId].products.push(curr.product);
+          acc[categoryId].products.push({
+            ...curr.product,
+            reason: curr.product.reason,
+          });
 
           return acc;
         }, {}),

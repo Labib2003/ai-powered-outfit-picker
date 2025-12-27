@@ -4,8 +4,8 @@ import { Product } from "@/db/schema/product";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition group pt-0">
-      <div className="relative overflow-hidden bg-muted h-64">
+    <Card className="overflow-hidden hover:shadow-lg transition group pt-0 grow flex flex-col">
+      <div className="relative overflow-hidden bg-muted h-64 grow">
         <img
           src={product.imageUrl || undefined}
           alt={product.name}

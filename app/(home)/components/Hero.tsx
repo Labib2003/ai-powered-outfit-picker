@@ -7,8 +7,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Category } from "@/db/schema/category";
-import { Sparkles } from "lucide-react";
 import Image from "next/image";
+import AiStylistModal from "./AiStylistModal";
 
 export default function Hero({ categories }: { categories: Category[] }) {
   return (
@@ -38,12 +38,7 @@ export default function Hero({ categories }: { categories: Category[] }) {
           </p>
 
           <div className="flex flex-col items-start gap-2">
-            <button className="relative group">
-              <div className="relative px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground rounded-full font-semibold flex items-center gap-2 hover:scale-105 transition text-sm sm:text-base">
-                <Sparkles className="w-4 sm:w-5 h-4 sm:h-5" />
-                Consult a Stylist
-              </div>
-            </button>
+            <AiStylistModal />
             <p className="text-xs sm:text-sm ml-2 font-mono text-accent-foreground">
               Not sure what to get?
             </p>
