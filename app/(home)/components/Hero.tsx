@@ -66,7 +66,9 @@ export default function Hero({ categories }: { categories: Category[] }) {
                       className="w-full h-full object-cover group-hover:scale-110 transition duration-300 absolute inset-0"
                     />
                     <div className="bg-linear-to-t from-black via-black/80 to-transparent absolute inset-0"></div>
-                    <p className="z-10 text-white">{category.description}</p>
+                    <p className="z-10 text-white line-clamp-3">
+                      {category.description}
+                    </p>
                   </div>
                   <h3 className="font-sans text-lg font-semibold text-foreground group-hover:text-primary transition">
                     {category.name}

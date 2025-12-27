@@ -9,13 +9,18 @@ const ProductCard = ({ product }: { product: Product }) => {
         <img
           src={product.imageUrl || undefined}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+          className="w-full aspect-square object-cover group-hover:scale-110 transition duration-300"
         />
       </div>
 
       <div className="px-5 space-y-3">
-        <h3 className="font-semibold text-foreground line-clamp-2">
+        <h3
+          className="font-semibold text-foreground line-clamp-2"
+          title={product.name}
+        >
           {product.name}
+          <br />
+          &nbsp;
         </h3>
 
         <p

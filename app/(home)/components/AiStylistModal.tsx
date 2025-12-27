@@ -52,15 +52,12 @@ const AiStylistModal = () => {
 
   const stylistMutation = trpc.search.semanticProductSearch.useMutation();
 
-  /* ---------------------------------------------
-     Rotate AI loading messages
-  --------------------------------------------- */
   useEffect(() => {
     if (!stylistMutation.isPending) return;
 
     const interval = setInterval(() => {
       setLoadingMessageIndex((i) => (i + 1) % LOADING_MESSAGES.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [stylistMutation.isPending]);
@@ -87,9 +84,7 @@ const AiStylistModal = () => {
           </DialogTitle>
         </DialogHeader>
 
-        {/* CONTENT SCROLL AREA */}
         <div className="flex-1 overflow-y-auto pr-2 -mr-2">
-          {/* INPUT STATE */}
           {!stylistMutation.data && !stylistMutation.isPending && (
             <div className="space-y-6 py-4">
               <div className="text-center space-y-2 mb-8">
@@ -139,12 +134,11 @@ const AiStylistModal = () => {
             </div>
           )}
 
-          {/* LOADING STATE */}
           {stylistMutation.isPending && (
             <div className="flex flex-col items-center justify-center py-20 space-y-6">
               <div className="relative">
-                <Loader2Icon className="w-12 h-12 text-primary animate-spin" />
-                <SparklesIcon className="w-6 h-6 text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <Loader2Icon className="w-12 h-12 text-primary animate-spin opacity-30" />
+                <SparklesIcon className="w-6 h-6 text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
               </div>
               <p className="text-base text-muted-foreground animate-pulse font-medium">
                 {LOADING_MESSAGES[loadingMessageIndex]}
@@ -152,7 +146,6 @@ const AiStylistModal = () => {
             </div>
           )}
 
-          {/* RESULT STATE */}
           {stylistMutation.data && (
             <div className="space-y-12 py-6">
               <div className="text-center space-y-2">

@@ -53,7 +53,8 @@ const categoryPlanPrompt = new PromptTemplate({
     - Do not invent categories
     - If nothing matches, return an empty categories array
     - Decide if one or multiple categories are needed
-    - Decide how many products to suggest per category
+    - Give the user a warm, helpful and reassuing greeting relavent to their request (max 20 words)
+    - For each category chosen, provide a brief reason why (max 30 words)
 
     {format_instructions}
 
