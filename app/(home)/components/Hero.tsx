@@ -49,7 +49,7 @@ export default function Hero({ categories }: { categories: Category[] }) {
       {/* Category Carousel */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-8">
-          Shop by Category
+          Our Catalogue Includes
         </h2>
         <Carousel className="w-full">
           <CarouselContent className="-ml-2 md:-ml-4">
