@@ -9,7 +9,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold">S</span>
               </div>
-              <span className="font-bold text-lg">Fusion Design</span>
+              <span className="font-bold text-lg">Fusion Designs</span>
             </div>
             <p className="text-sm opacity-75">
               Your destination for trendy and timeless fashion.
@@ -100,7 +100,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-background/20 pt-8 flex flex-col md:flex-row items-center justify-between text-sm opacity-75">
-          <p>&copy; 2026 Fusion Design. All rights reserved.</p>
+          <p>&copy; 2026 Fusion Designs. All rights reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <a href="#" className="hover:opacity-100 transition">
               Instagram

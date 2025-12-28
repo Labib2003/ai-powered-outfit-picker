@@ -14,9 +14,9 @@ const _facultyGlyphic = Faculty_Glyphic({
 });
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "Fusion Designs",
+  description:
+    "Fusion Designs is your one stop shop for urban clothing and accessories. From formal wear to outdoor gear, we have something for everyone. Our specialty is an AI stylist that helps you find the perfect pick from our catalogue for any occasion.",
 };
 
 export default function RootLayout({
