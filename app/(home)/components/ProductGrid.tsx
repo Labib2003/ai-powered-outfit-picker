@@ -13,6 +13,7 @@ import { trpc } from "@/app/_trpc/client";
 import { HandlePagination } from "@/components/custom/HandlePagination";
 import ProductCard from "./ProductCard";
 import ProductCardSkeleton from "./ProductCardSkeleton";
+import { Product } from "@/db/schema/product";
 
 export default function ProductGrid() {
   const router = useRouter();
@@ -82,7 +83,10 @@ export default function ProductGrid() {
           </>
         ) : (
           paginatedProducts?.data?.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product as unknown as Product}
+            />
           ))
         )}
       </div>
