@@ -6,12 +6,20 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Category } from "@/db/schema/category";
 import { SearchIcon } from "lucide-react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") ?? "");
+  const [price, setPrice] = useState<[number, number]>([
+    Number(searchParams.get("priceMin") ?? 0),
+    Number(searchParams.get("priceMax") ?? 500),
+  ]);
+  const debouncedSearch = useDebounce(search, 300);
+  const debouncedPrice = useDebounce(price, 300);
 
   const updateParams = useCallback(
     (mutator: (params: URLSearchParams) => void, resetPage?: boolean) => {
@@ -23,10 +31,17 @@ const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
     [router, pathname, searchParams],
   );
 
-  const search = searchParams.get("search") ?? "";
+  useEffect(() => {
+    updateParams((params) => {
+      if (debouncedSearch) params.set("search", debouncedSearch);
+      else params.delete("search");
+
+      params.set("priceMin", String(debouncedPrice[0]));
+      params.set("priceMax", String(debouncedPrice[1]));
+    }, true);
+  }, [debouncedSearch, debouncedPrice]);
+
   const selectedCategories = searchParams.getAll("category");
-  const priceMin = Number(searchParams.get("priceMin") ?? 0);
-  const priceMax = Number(searchParams.get("priceMax") ?? 500);
 
   const toggleCategory = (id: string) => {
     updateParams((params) => {
@@ -52,12 +67,7 @@ const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
           <Input
             placeholder="Search products..."
             value={search}
-            onChange={(e) =>
-              updateParams((params) => {
-                if (e.target.value) params.set("search", e.target.value);
-                else params.delete("search");
-              }, true)
-            }
+            onChange={(e) => setSearch(e.target.value)}
             className="pl-10"
           />
         </div>
@@ -85,19 +95,14 @@ const ProductFilterInputs = ({ categories }: { categories: Category[] }) => {
         <div className="space-y-3">
           <h3 className="font-semibold text-foreground">Price Range</h3>
           <Slider
-            value={[priceMin, priceMax]}
+            value={price}
             max={500}
             step={10}
-            onValueChange={([min, max]) =>
-              updateParams((params) => {
-                params.set("priceMin", String(min));
-                params.set("priceMax", String(max));
-              }, true)
-            }
+            onValueChange={([min, max]) => setPrice([min, max])}
           />
           <div className="flex justify-between text-sm text-muted-foreground">
-            <span>${priceMin}</span>
-            <span>${priceMax}</span>
+            <span>${price[0]}</span>
+            <span>${price[1]}</span>
           </div>
         </div>
       </div>
