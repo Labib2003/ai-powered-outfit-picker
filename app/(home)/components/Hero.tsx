@@ -39,8 +39,8 @@ export default function Hero({ categories }: { categories: Category[] }) {
 
           <div className="flex flex-col items-start gap-2">
             <AiStylistModal />
-            <p className="text-xs sm:text-sm ml-2 font-mono text-accent-foreground">
-              Not sure what to get?
+            <p className="text-xs sm:text-sm ml-2 text-accent-foreground">
+              If you are not sure where to start, try our AI Stylist!
             </p>
           </div>
         </div>

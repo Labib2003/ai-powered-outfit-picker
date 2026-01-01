@@ -71,7 +71,7 @@ const AiStylistModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="group relative px-8 py-4 bg-linear-to-r from-primary to-primary/90 text-primary-foreground rounded-full font-semibold text-base flex items-center gap-3 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+        <button className="group relative px-8 py-4 bg-linear-to-r from-primary to-primary/90 text-primary-foreground rounded-full font-semibold text-base flex items-center gap-3 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer animate-bounce my-5">
           <SparklesIcon className="w-5 h-5 group-hover:rotate-12 transition-transform" />
           <span>Consult our AI Stylist</span>
         </button>
