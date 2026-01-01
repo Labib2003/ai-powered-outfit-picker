@@ -1,5 +1,6 @@
 import { pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createSelectSchema } from "drizzle-zod";
+import { ZodTypeAny } from "zod";
 import { z } from "zod/v4";
 
 export const categoryTable = pgTable("categories", {
@@ -15,5 +16,5 @@ export const categoryTable = pgTable("categories", {
     .$onUpdateFn(() => new Date()),
 });
 
-const categorySelectSchema = createSelectSchema(categoryTable);
+export const categorySelectSchema = createSelectSchema(categoryTable);
 export type Category = z.infer<typeof categorySelectSchema>;

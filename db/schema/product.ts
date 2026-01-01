@@ -29,5 +29,5 @@ export const productsTable = pgTable("products", {
     .$onUpdateFn(() => new Date()),
 });
 
-const productSelectSchema = createSelectSchema(productsTable);
+export const productSelectSchema = createSelectSchema(productsTable);
 export type Product = z.infer<typeof productSelectSchema>;
